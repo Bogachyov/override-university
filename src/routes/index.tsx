@@ -1,8 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import logo from "@/assets/logo.jpg";
+import logo from "@/assets/logo.png";
 import { submitLead } from "@/lib/lead.functions";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,12 +31,22 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
+const COUNTRY_OPTIONS = [
+  "Россия",
+  "Казахстан",
+  "Беларусь",
+  "Украина",
+  "Узбекистан",
+  "Кыргызстан",
+  "Таджикистан / Туркменистан",
+  "Грузия",
+  "Азербайджан / Армения",
+  "Литва / Латвия / Эстония",
+  "Молдова",
+  "Другая страна (Релокация / Мир)",
+];
+
 const QUESTIONS = [
-  {
-    key: "country" as const,
-    title: "Из какой ты страны?",
-    options: ["СНГ", "Кавказ", "Другая"],
-  },
   {
     key: "hours" as const,
     title: "Сколько часов в день ты готов работать ради результата?",
