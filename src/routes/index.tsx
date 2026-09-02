@@ -302,8 +302,44 @@ function QuizSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
               </div>
             )}
 
+            {step === 1 && (
+              <div>
+                <h2 className="text-xl leading-snug font-semibold text-gold-bright">
+                  Из какой ты страны?
+                </h2>
+                <Select
+                  value={answers["country"] ?? ""}
+                  onValueChange={(value) => pick("country", value)}
+                >
+                  <SelectTrigger className="mt-5 h-auto min-h-[3.5rem] w-full rounded-xl border border-gold/25 bg-background px-4 py-4 text-base text-foreground focus:ring-1 focus:ring-gold/50 focus:ring-offset-0 [&>span]:line-clamp-none">
+                    <SelectValue placeholder="Выбери страну…" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-[min(24rem,var(--radix-select-content-available-height))] rounded-xl border-gold/25 bg-card text-foreground shadow-xl">
+                    {COUNTRY_OPTIONS.map((opt) => (
+                      <SelectItem
+                        key={opt}
+                        value={opt}
+                        className="cursor-pointer py-3 pr-8 text-base text-foreground focus:bg-wine/30 focus:text-gold-bright data-[state=checked]:text-gold-bright"
+                      >
+                        {opt}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {step > 0 && status !== "sending" && (
+                  <button
+                    type="button"
+                    onClick={() => setStep(step - 1)}
+                    className="mt-5 text-sm text-muted-foreground"
+                  >
+                    ← Назад
+                  </button>
+                )}
+              </div>
+            )}
+
             {QUESTIONS.map((q, i) =>
-              step === i + 1 ? (
+              step === i + 2 ? (
                 <div key={q.key}>
                   <h2 className="text-xl leading-snug font-semibold text-gold-bright">{q.title}</h2>
                   <div className="mt-5 space-y-3">
