@@ -75,7 +75,7 @@ function Landing() {
             <img
               src={logo}
               alt="Официальный логотип Override University"
-              className="w-full rounded-full ring-1 ring-gold/40"
+              className="w-full"
               width={1026}
               height={1024}
             />
