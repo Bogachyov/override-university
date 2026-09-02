@@ -1,8 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import logo from "@/assets/logo.jpg";
+import logo from "@/assets/logo.png";
 import { submitLead } from "@/lib/lead.functions";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,12 +31,22 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
+const COUNTRY_OPTIONS = [
+  "Россия",
+  "Казахстан",
+  "Беларусь",
+  "Украина",
+  "Узбекистан",
+  "Кыргызстан",
+  "Таджикистан / Туркменистан",
+  "Грузия",
+  "Азербайджан / Армения",
+  "Литва / Латвия / Эстония",
+  "Молдова",
+  "Другая страна (Релокация / Мир)",
+];
+
 const QUESTIONS = [
-  {
-    key: "country" as const,
-    title: "Из какой ты страны?",
-    options: ["СНГ", "Кавказ", "Другая"],
-  },
   {
     key: "hours" as const,
     title: "Сколько часов в день ты готов работать ради результата?",
@@ -58,7 +75,7 @@ function Landing() {
             <img
               src={logo}
               alt="Официальный логотип Override University"
-              className="w-full rounded-full ring-1 ring-gold/40"
+              className="w-full"
               width={1026}
               height={1024}
             />
@@ -285,8 +302,44 @@ function QuizSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
               </div>
             )}
 
+            {step === 1 && (
+              <div>
+                <h2 className="text-xl leading-snug font-semibold text-gold-bright">
+                  Из какой ты страны?
+                </h2>
+                <Select
+                  value={answers["country"] ?? ""}
+                  onValueChange={(value) => pick("country", value)}
+                >
+                  <SelectTrigger className="mt-5 h-auto min-h-[3.5rem] w-full rounded-xl border border-gold/25 bg-background px-4 py-4 text-base text-foreground focus:ring-1 focus:ring-gold/50 focus:ring-offset-0 [&>span]:line-clamp-none">
+                    <SelectValue placeholder="Выбери страну…" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-[min(24rem,var(--radix-select-content-available-height))] rounded-xl border-gold/25 bg-card text-foreground shadow-xl">
+                    {COUNTRY_OPTIONS.map((opt) => (
+                      <SelectItem
+                        key={opt}
+                        value={opt}
+                        className="cursor-pointer py-3 pr-8 text-base text-foreground focus:bg-wine/30 focus:text-gold-bright data-[state=checked]:text-gold-bright"
+                      >
+                        {opt}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {step > 0 && status !== "sending" && (
+                  <button
+                    type="button"
+                    onClick={() => setStep(step - 1)}
+                    className="mt-5 text-sm text-muted-foreground"
+                  >
+                    ← Назад
+                  </button>
+                )}
+              </div>
+            )}
+
             {QUESTIONS.map((q, i) =>
-              step === i + 1 ? (
+              step === i + 2 ? (
                 <div key={q.key}>
                   <h2 className="text-xl leading-snug font-semibold text-gold-bright">{q.title}</h2>
                   <div className="mt-5 space-y-3">
