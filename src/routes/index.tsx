@@ -185,7 +185,6 @@ function Landing() {
 }
 
 function QuizSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const send = useServerFn(submitLead);
   const [step, setStep] = useState(0);
   const [telegram, setTelegram] = useState("");
   const [answers, setAnswers] = useState<Record<string, string>>({});
