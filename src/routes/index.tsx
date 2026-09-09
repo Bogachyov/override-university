@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import logo from "@/assets/logo.png";
-import { submitLead } from "@/lib/lead.functions";
 import {
   Select,
   SelectContent,
@@ -187,7 +185,6 @@ function Landing() {
 }
 
 function QuizSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const send = useServerFn(submitLead);
   const [step, setStep] = useState(0);
   const [telegram, setTelegram] = useState("");
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -198,14 +195,17 @@ function QuizSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
   const finish = async (final: Record<string, string>) => {
     setStatus("sending");
     try {
-      await send({
-        data: {
+      const res = await fetch("/api/public/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           telegram: telegram.startsWith("@") ? telegram : `@${telegram}`,
           country: final["country"] ?? "",
           hours: final["hours"] ?? "",
           goal: final["goal"] ?? "",
-        },
+        }),
       });
+      if (!res.ok) throw new Error(`Request failed [${res.status}]`);
       setStatus("done");
     } catch (e) {
       console.error(e);
