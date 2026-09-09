@@ -1,14 +1,38 @@
-# Welcome to your Lovable project
+# Override University Beta
+
+Создай адаптивный мобильный одностраничный сайт для университета "Override University".
+
+ВАЖНОЕ ТРЕБОВАНИЕ К ЦВЕТАМ И ЛОГОТИПУ:
+1. По центру главного экрана вставь официальное лого по этой прямой ссылке: https://ibb.co/NdQt9796
+2. Цветовую гамму сайта строй строго на основе этого логотипа. Используй следующие точные HEX-коды:
+- Основной бордовый цвет (для кнопок, акцентов, свечения): #5b1423
+- Основной золотой цвет (для важных заголовков и деталей): #a0813f
+- Фон сайта: глубокий темно-серый или чистый черный, чтобы бордовый и золотой смотрелись максимально дорого и контрастно.
+
+СТРУКТУРА САЙТА:
+- Главный экран: Логотип, крупный золотой заголовок "Система образования сломана. Мы создали Override." Подзаголовок: "Практические навыки (ИИ, Трафик, Автоматизации, E-com и другие) в твоем телефоне за $50/мес. Без кредитов, рассрочек на $1500 и инфоцыганской воды." Бордовая кнопка с золотым свечением "Занять место на закрытый бета-тест".
+- Второй блок: Жесткое текстовое разоблачение классического обучения (школы, вузы, курсы и альтернативное обучение - это ловушка, дающая замороженную теорию, после которой люди выходят пустыми).
+- Третий блок: Наше решение (Обучение без заморозки, еженедельные патчи контента под изменения рынка, подписка за $50 с возможностью выйти в любой момент).
+
+ЛОГИКА АНКЕТЫ (КВИЗА): При нажатии на кнопку "Занять место" плавно открывается пошаговая анкета из 4 вопросов:
+1. Твой никнейм в Telegram (поле ввода с @).
+2. Из какой ты страны? (выбор: СНГ / Кавказ / Другая).
+3. Сколько часов в день ты готов работать ради результата? (выбор: 1-2 часа / 3-5 часов / 6+ часов).
+4. Твоя главная цель? (выбор: Заработок в USDT / Свобода от системы / Свое агентство).
+
+Страница благодарности после финала: "Твоя заявка принята. Ожидай сообщения от нашего бота в Telegram." Настрой отправку данных из анкеты в телеграм бот. Токен бота:
+@secret:TELEGRAM_BOT_TOKEN 
+Id чата: 609868094
 
 This project was built with [Lovable](https://lovable.dev).
 
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/158b06f6-c595-4074-8416-fac199e96f3e).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +44,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
