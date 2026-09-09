@@ -195,14 +195,17 @@ function QuizSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
   const finish = async (final: Record<string, string>) => {
     setStatus("sending");
     try {
-      await send({
-        data: {
+      const res = await fetch("/api/public/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           telegram: telegram.startsWith("@") ? telegram : `@${telegram}`,
           country: final["country"] ?? "",
           hours: final["hours"] ?? "",
           goal: final["goal"] ?? "",
-        },
+        }),
       });
+      if (!res.ok) throw new Error(`Request failed [${res.status}]`);
       setStatus("done");
     } catch (e) {
       console.error(e);
