@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import logo from "@/assets/logo.png";
-import { submitLead } from "@/lib/lead.functions";
 import {
   Select,
   SelectContent,
